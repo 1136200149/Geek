@@ -63,12 +63,12 @@
             <i class="iconfont" title="人气">&#xe60b;</i> 98032
           </div>
         </div>
-        <div class="detail-about" th:each="user:${user}">
+        <div class="detail-about">
           <a class="jie-user" href="">
             <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="">
             <cite>
               [[${question.uname}]]
-              <em>1分钟前发布</em>
+              <em>  [[${question.ctime}]]</em>
             </cite>
           </a>
           <div class="detail-hits" data-id="{{rows.id}}">

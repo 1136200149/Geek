@@ -1,12 +1,12 @@
 package com.geek.utils;
 
-public class errorMessageModel {
+public class ErrorMessageModel {
 	private String field;
 	private String msg;
 	
-	public errorMessageModel() {
+	public ErrorMessageModel() {
 	}
-	public errorMessageModel(String field, String msg) {
+	public ErrorMessageModel(String field, String msg) {
 		this.field = field;
 		this.msg = msg;
 	}

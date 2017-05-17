@@ -1,20 +1,21 @@
 package com.geek.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.geek.domain.Nav;
+import com.geek.domain.Question;
 import com.geek.domain.User;
 import com.geek.repository.NavDao;
 import com.geek.repository.QuestionDao;
@@ -46,14 +47,26 @@ public class QuestionController {
 	}
 
 	
-	@RequestMapping(value = "/addquestion", method = RequestMethod.POST) //创建问题
+	@RequestMapping(value = "/addquestion", method = RequestMethod.POST) //发布问题
 	public ModelAndView addquestion(HttpSession httpSession,Model model,@Valid QuestionForm question) {
-		String userid=(String) httpSession.getAttribute("userid");
-		questiondao.Addquestion(question, userid);//发布问题
-	
-		return new ModelAndView("redirect:/index");
+		User user = (User) httpSession.getAttribute("user");
+		
+		
+		String id = questiondao.Addquestion(question, user);//
+		return new ModelAndView("redirect:/detail/"+id);
 		
 	}
+	
+	
+	
+	@RequestMapping("/detail/{id}") //详情
+	public String detail(Model model, @PathVariable String id,HttpSession httpSession) {
+		Question question = questiondao.findById(id);
+		model.addAttribute("question", question);
+		
+			return "jie/detail";
+	}
+	
 	
 
 	

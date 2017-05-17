@@ -18,7 +18,7 @@ public class Question {
 	private String id;
 	private String userid;
 	private String title;
-	private String name;
+	private String uname;
 	private String context;
 	private Integer top;
 	private Timestamp ctime;
@@ -26,10 +26,6 @@ public class Question {
 	private String number;
 	private String state;
 	
-	//对应 Nav表   栏目字段
-		@ManyToOne(cascade = CascadeType.DETACH)
-		@JsonBackReference
-
 		@OneToOne
 		@JoinColumn(name="navid")
 		private Nav nav;
@@ -68,12 +64,12 @@ public class Question {
 			this.title = title;
 		}
 
-		public String getName() {
-			return name;
+		public String getUname() {
+			return uname;
 		}
 
-		public void setName(String name) {
-			this.name = name;
+		public void setUname(String uname) {
+			this.uname = uname;
 		}
 
 		public String getContext() {
@@ -122,6 +118,9 @@ public class Question {
 
 		public void setNav(Nav nav) {
 			this.nav = nav;
+		}
+
+		public Question() {
 		}
 		
 

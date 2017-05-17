@@ -23,6 +23,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.geek.domain.Question;
+import com.geek.domain.User;
 import com.geek.valid.QuestionForm;
 
 
@@ -63,17 +64,19 @@ public class QuestionDao {
 	}
 	
 	
-	public void Addquestion(QuestionForm questionForm,String userid) {
+	public String Addquestion(QuestionForm questionForm,User user) {
+		String uuid = UUID.randomUUID().toString().replace("-", "");
 		Question question = new Question();
-		question.setId(UUID.randomUUID().toString().replace("-", ""));//问题的id
-		question.setUserid(userid);//用户id
+		question.setId(uuid);//问题的id
+		question.setUserid(user.getId());//用户id
 		question.setCtime(new Timestamp(System.currentTimeMillis()));//创建时间
 		question.setContext(questionForm.getContext());
 		question.setTitle(questionForm.getTitle());
 		question.setNav(questionForm.getNav());
 		question.setNav(questionForm.getNav());
+		question.setUname(user.getUname());
 		getSession().save(question);
-		
+		return uuid;
 		
 	}
 	

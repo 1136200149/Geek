@@ -12,7 +12,7 @@ import javax.persistence.OneToOne;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-public class question {
+public class Question {
 	
 	@Id
 	private String id;

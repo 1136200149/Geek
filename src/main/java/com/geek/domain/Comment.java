@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-public class comment {
+public class Comment {
 
 	@Id
 	private String id;

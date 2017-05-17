@@ -71,7 +71,7 @@ public class QuestionDao {
 		question.setContext(questionForm.getContext());
 		question.setTitle(questionForm.getTitle());
 		question.setNav(questionForm.getNav());
-		
+		question.setNav(questionForm.getNav());
 		getSession().save(question);
 		
 		

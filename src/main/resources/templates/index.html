@@ -37,7 +37,7 @@
       </a>
       <div class="nav">
         <a href="/user/set/"><i class="iconfont icon-shezhi"></i>设置</a>
-        <a href="/user/logout/"><i class="iconfont icon-tuichu" style="top: 0; font-size: 22px;"></i>退了</a>
+        <a th:href="@{/logout}"><i class="iconfont icon-tuichu" style="top: 0; font-size: 22px;"></i>退了</a>
       </div> 
       </div>
 
@@ -60,7 +60,7 @@
           <i class="iconfont icon-sousuo"></i>
           <input class="layui-input" autocomplete="off" placeholder="搜索内容，回车跳转" type="text" name="q">
         </form>
-        <a th:href="@{/add}" class="layui-btn jie-add">发布问题</a>
+        <a th:href="@{/add}" class="layui-btn jie-add" th:if="${session?.user != null}">发布问题</a>
       </div>
       
       
@@ -86,7 +86,7 @@
         </li>
         <li class="fly-list-li">
           <a href="user/home.html" class="fly-list-avatar">
-            <img src="../res/images/avatar/00.jpg" alt="">
+            <img src="../images/avatar/00.jpg" alt="">
           </a>
           <h2 class="fly-tip">
             <a href="jie/detail.html">基于 layui的轻量级问答社区页面模版 V2版本</a>
@@ -107,7 +107,7 @@
       <ul class="fly-list">
         <li class="fly-list-li">
           <a href="user/home.html" class="fly-list-avatar">
-            <img src="../res/images/avatar/default.png" alt="">
+            <img src="../images/avatar/default.png" alt="">
           </a>
           <h2 class="fly-tip">
             <a href="jie/detail.html">关于layui 引用其他插件，扩展模块 的用法</a>
@@ -140,7 +140,7 @@
       <dl>
         <dd>
           <a href="user/home.html">
-            <img src="../res/images/avatar/default.png">
+            <img src="../images/avatar/default.png">
             <cite>纸飞机</cite>
             <i>159次回答</i>
           </a>
@@ -193,19 +193,19 @@
     <a href="http://fly.layui.com/jie/2461.html" target="_blank">微信公众号</a>
   </p>
 </div>
-<script src="../res/layui/layui.js"></script>
+<script th:src="@{/layui/layui.js}"></script>
 <script>
 layui.cache.page = '';
 layui.cache.user = {
   username: '游客'
   ,uid: -1
-  ,avatar: '../res/images/avatar/00.jpg'
+  ,avatar: '../images/avatar/00.jpg'
   ,experience: 83
   ,sex: '男'
 };
 layui.config({
   version: "2.0.0"
-  ,base: '../res/mods/'
+  ,base: '../mods/'
 }).extend({
   fly: 'index'
 }).use('fly');

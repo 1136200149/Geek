@@ -23,20 +23,17 @@
       </a>
     </div>
     
-    <div class="nav-user">      
-      <!-- 登入后的状态 -->
-      
-      <a class="avatar" href="../user/index.html">
-        <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0">
-        <cite>贤心</cite>
-        <i>VIP2</i>
-      </a>
-      <div class="nav">
-        <a href="../user/set.html"><i class="iconfont icon-shezhi"></i>设置</a>
-        <a href=""><i class="iconfont icon-tuichu" style="top: 0; font-size: 22px;"></i>退了</a>
-      </div>
-      
-    </div>
+     <div class="nav-user">
+      <!-- 未登入状态 -->
+      <a class="unlogin" href="user/login.html"><i class="iconfont icon-touxiang"></i></a>
+      <span><a th:href="@{login}">登入</a><a href="user/reg.html">注册</a></span>
+      <p class="out-login">
+        <a href="" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-qq" title="QQ登入"></a>
+        <a href="" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-weibo" title="微博登入"></a>
+      </p>   
+          </div>
+ 
+ 
   </div>
 </div>
 
@@ -51,44 +48,43 @@
       <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
         <div class="layui-tab-item layui-show">
           <div class="layui-form layui-form-pane">
-            <form method="post">
-              <div class="layui-form-item">
-                <label for="L_email" class="layui-form-label">邮箱</label>
+          
+            <form method="post" th:action="@{/user/register}">
+            
+            
+             <div class="layui-form-item">
+                <label for="L_username" class="layui-form-label" >用户名</label>
                 <div class="layui-input-inline">
-                  <input type="text" id="L_email" name="email" required lay-verify="email" autocomplete="off" class="layui-input">
+                  <input type="text" id="L_username" name="uname" required lay-verify="required" autocomplete="off" class="layui-input">
                 </div>
-                <div class="layui-form-mid layui-word-aux">将会成为您唯一的登入名</div>
+                   <div class="layui-form-mid layui-word-aux">将会成为您唯一的登入名</div>
               </div>
+              
               <div class="layui-form-item">
-                <label for="L_username" class="layui-form-label">昵称</label>
+                <label for="L_email" class="layui-form-label" >邮箱</label>
                 <div class="layui-input-inline">
-                  <input type="text" id="L_username" name="username" required lay-verify="required" autocomplete="off" class="layui-input">
+                  <input type="text" id="L_email" name="mail" required lay-verify="email" autocomplete="off" class="layui-input">
                 </div>
+             
               </div>
+             
               <div class="layui-form-item">
-                <label for="L_pass" class="layui-form-label">密码</label>
+                <label for="L_pass" class="layui-form-label" >密码</label>
+               
                 <div class="layui-input-inline">
-                  <input type="password" id="L_pass" name="pass" required lay-verify="required" autocomplete="off" class="layui-input">
+                  <input type="password" id="L_pass" name="passwd" required lay-verify="required" autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-mid layui-word-aux">6到16个字符</div>
               </div>
               <div class="layui-form-item">
-                <label for="L_repass" class="layui-form-label">确认密码</label>
+                <label for="L_repass" class="layui-form-label" >确认密码</label>
+                  <span th:text="${#httpServletRequest.getParameter('error')}" style="color:red"></span>
                 <div class="layui-input-inline">
-                  <input type="password" id="L_repass" name="repass" required lay-verify="required" autocomplete="off" class="layui-input">
+                  <input type="password" id="L_repass" name="passwd2" required lay-verify="required" autocomplete="off" class="layui-input">
                 </div>
               </div>
               <div class="layui-form-item">
-                <label for="L_vercode" class="layui-form-label">人类验证</label>
-                <div class="layui-input-inline">
-                  <input type="text" id="L_vercode" name="vercode" required lay-verify="required" placeholder="请回答后面的问题" autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid">
-                  <span style="color: #c00;">{{d.vercode}}</span>
-                </div>
-              </div>
-              <div class="layui-form-item">
-                <button class="layui-btn" lay-filter="*" lay-submit>立即注册</button>
+                <button class="layui-btn" type="submit">立即注册</button>
               </div>
               <div class="layui-form-item fly-form-app">
                 <span>或者直接使用社交账号快捷注册</span>
@@ -112,19 +108,19 @@
     <a href="http://fly.layui.com/jie/2461.html" target="_blank">微信公众号</a>
   </p>
 </div>
-<script th:src="@{/res/layui/layui.js}"></script>
+<script th:src="@{/layui/layui.js}"></script>
 <script>
 layui.cache.page = 'user';
 layui.cache.user = {
   username: '游客'
   ,uid: -1
-  ,avatar: '../../res/images/avatar/00.jpg'
+  ,avatar: '../images/avatar/00.jpg'
   ,experience: 83
   ,sex: '男'
 };
 layui.config({
   version: "2.0.0"
-  ,base: '../../res/mods/'
+  ,base: '../mods/'
 }).extend({
   fly: 'index'
 }).use('fly');

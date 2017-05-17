@@ -23,22 +23,9 @@ public class IndexController {
 
 	
 	
-	@RequestMapping("/login") //登陆入口
-	public String login() {
-		return "user/login";
-	}
+	
+	
 
-	
-	@RequestMapping("/register") //登陆入口
-	public String register() {
-		return "user/reg";
-	}
-	
-	
-	@RequestMapping("/add") //登陆入口
-	public String add() {
-		return "jie/add";
-	}
 
 	
 	

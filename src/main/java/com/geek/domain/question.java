@@ -26,10 +26,6 @@ public class Question {
 	private String number;
 	private String state;
 	
-	//对应 Nav表   栏目字段
-		@ManyToOne(cascade = CascadeType.DETACH)
-		@JsonBackReference
-
 		@OneToOne
 		@JoinColumn(name="navid")
 		private Nav nav;
@@ -122,6 +118,9 @@ public class Question {
 
 		public void setNav(Nav nav) {
 			this.nav = nav;
+		}
+
+		public Question() {
 		}
 		
 

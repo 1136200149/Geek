@@ -63,17 +63,19 @@ public class QuestionDao {
 	}
 	
 	
-	public void Addquestion(QuestionForm questionForm,String userid) {
+	public String Addquestion(QuestionForm questionForm,String userid) {
+		String uuid = UUID.randomUUID().toString().replace("-", "");
 		Question question = new Question();
-		question.setId(UUID.randomUUID().toString().replace("-", ""));//问题的id
+		question.setId(uuid);//问题的id
 		question.setUserid(userid);//用户id
 		question.setCtime(new Timestamp(System.currentTimeMillis()));//创建时间
 		question.setContext(questionForm.getContext());
 		question.setTitle(questionForm.getTitle());
 		question.setNav(questionForm.getNav());
 		question.setNav(questionForm.getNav());
-		getSession().save(question);
 		
+		getSession().save(question);
+		return uuid;
 		
 	}
 	

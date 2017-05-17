@@ -21,10 +21,9 @@ public class Comment {
 	private String context;
 	private String questionid;
 	
-	
-	
-	
-	
+	public void Comment(){
+		
+	}
 	public String getId() {
 		return id;
 	}

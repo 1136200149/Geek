@@ -18,7 +18,7 @@ public class Question {
 	private String id;
 	private String userid;
 	private String title;
-	private String name;
+	private String uname;
 	private String context;
 	private Integer top;
 	private Timestamp ctime;
@@ -64,12 +64,12 @@ public class Question {
 			this.title = title;
 		}
 
-		public String getName() {
-			return name;
+		public String getUname() {
+			return uname;
 		}
 
-		public void setName(String name) {
-			this.name = name;
+		public void setUname(String uname) {
+			this.uname = uname;
 		}
 
 		public String getContext() {

@@ -17,7 +17,6 @@ public class User {
 	private String id;
 	private String uname;
 	private String passwd;
-	private String name;
 	private String phone;
 	private String mail;
 	private Timestamp ctime;
@@ -44,12 +43,7 @@ public class User {
 		this.passwd = passwd;
 	}
 	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+
 	public String getPhone() {
 		return phone;
 	}

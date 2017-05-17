@@ -51,8 +51,8 @@ public class QuestionController {
 	public ModelAndView addquestion(HttpSession httpSession,Model model,@Valid QuestionForm question) {
 		User user = (User) httpSession.getAttribute("user");
 		
-		String userid = user.getId();
-		String id = questiondao.Addquestion(question, userid);//
+		
+		String id = questiondao.Addquestion(question, user);//
 		return new ModelAndView("redirect:/detail/"+id);
 		
 	}

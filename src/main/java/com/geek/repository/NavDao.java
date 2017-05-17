@@ -12,6 +12,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.stereotype.Repository;
 
 import com.geek.domain.Nav;
+import com.geek.domain.User;
 
 
 @Repository
@@ -30,4 +31,11 @@ public class NavDao {
 	    List<Nav> list = criteria.list();
 	    return list;
 	}
+	
+	public User findById(String id) {
+		return getSession().get(User.class, id);
+	}
+	
+	
+	
 }

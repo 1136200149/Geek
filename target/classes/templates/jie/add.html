@@ -21,20 +21,29 @@
       </a>
     </div>
     
-    <div class="nav-user">      
-      <!-- 登入后的状态 -->
-      
-      <a class="avatar" href="../user/index.html">
+     <div class="nav-user" th:if="${session?.user == null}">
+      <!-- 未登入状态 -->
+      <a class="unlogin" href="user/login.html"><i class="iconfont icon-touxiang"></i></a>
+      <span><a th:href="@{login}">登入</a><a href="user/reg.html">注册</a></span>
+      <p class="out-login">
+        <a href="" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-qq" title="QQ登入"></a>
+        <a href="" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-weibo" title="微博登入"></a>
+      </p>   
+          </div>
+          
+         <!-- 登入状态 -->  
+    <div class="nav-user" th:if="${session?.user != null}">  
+      <a class="avatar" href="user/index.html">
         <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0">
-        <cite>贤心</cite>
-        <i>VIP2</i>
+        <cite th:text="${session?.user?.uname}">贤心</cite>
+        <i>VIP2000000000</i>
       </a>
       <div class="nav">
-        <a href="../user/set.html"><i class="iconfont icon-shezhi"></i>设置</a>
-        <a href=""><i class="iconfont icon-tuichu" style="top: 0; font-size: 22px;"></i>退了</a>
+        <a href="/user/set/"><i class="iconfont icon-shezhi"></i>设置</a>
+        <a href="/user/logout/"><i class="iconfont icon-tuichu" style="top: 0; font-size: 22px;"></i>退了</a>
+      </div> 
       </div>
       
-    </div>
   </div>
 </div>
 
@@ -45,7 +54,7 @@
     <!-- <div class="fly-none">并无权限</div> -->
 
     <div class="layui-form layui-form-pane">
-      <form action="/geek/addquestion" method="post" enctype="multipart/form-data">
+      <form action="/addquestion" method="post" enctype="multipart/form-data">
         <div class="layui-form-item">
           <label for="L_title" class="layui-form-label">标题</label>
           <div class="layui-input-block">
@@ -54,7 +63,7 @@
         </div>
         <div class="layui-form-item layui-form-text">
           <div class="layui-input-block">
-            <textarea id="L_content" name="content" required lay-verify="required" placeholder="请输入内容" class="layui-textarea fly-editor" style="height: 260px;"></textarea>
+            <textarea id="L_content" name="context" required lay-verify="required" placeholder="请输入内容" class="layui-textarea fly-editor" style="height: 260px;"></textarea>
           </div>
           <label for="L_content" class="layui-form-label" style="top: -2px;">描述</label>
         </div>
@@ -62,15 +71,13 @@
           <div class="layui-inline">
             <label class="layui-form-label">所在类别</label>
             <div class="layui-input-block">
-              <select lay-verify="required" name="class">
-                <option></option>
-                <option value="1" >layui框架综合</option> 
-                <option value="2" >layui.mobile模块</option> 
-                <option value="3" >layer弹出层</option> 
+              <select lay-verify="required"  name="nav.id">
+                <option>请选择</option>
+                <option th:each="nav:${navs}" th:value="${nav?.id}" th:text="${nav?.name}">Java</option> 
               </select>
             </div>
           </div>
-          <div class="layui-inline">
+     <!--      <div class="layui-inline">
             <label class="layui-form-label">悬赏飞吻</label>
             <div class="layui-input-block">
               <select name="experience">
@@ -80,9 +87,11 @@
                 <option value="100">100</option>
               </select>
             </div>
-          </div>
+          </div> -->
+          
         </div>
-        <div class="layui-form-item">
+        
+   <!--      <div class="layui-form-item">
           <label for="L_vercode" class="layui-form-label">人类验证</label>
           <div class="layui-input-inline">
             <input type="text" id="L_vercode" name="vercode" required lay-verify="required" placeholder="请回答后面的问题" autocomplete="off" class="layui-input">
@@ -90,9 +99,9 @@
           <div class="layui-form-mid">
             <span style="color: #c00;">1+1=?</span>
           </div>
-        </div>
+        </div> -->
         <div class="layui-form-item">
-          <button class="layui-btn" lay-filter="*" lay-submit>立即发布</button>
+          <button class="layui-btn" type="sumbit">立即发布</button>
         </div>
       </form>
     </div>

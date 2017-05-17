@@ -75,6 +75,13 @@ public class UserController {
 		return mav; 
 	}
 	
+	@RequestMapping("/logout") //登出
+	public String logout(HttpSession httpSession) {
+		httpSession.removeAttribute("user");  
+		return "/index";
+	}
+	
+	
 	
 	
 

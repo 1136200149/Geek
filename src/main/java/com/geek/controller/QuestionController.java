@@ -63,7 +63,7 @@ public class QuestionController {
 	public String detail(Model model, @PathVariable String id,HttpSession httpSession) {
 		Question question = questiondao.findById(id);
 		model.addAttribute("question", question);
-		
+
 			return "jie/detail";
 	}
 	

@@ -40,18 +40,13 @@ public class QuestionController {
 	public String add(Model model) {
 		List<Nav> list = navdao.FindAll();
 		model.addAttribute("navs", list);
-		
-			return "jie/add";
-		
-		
+		return "jie/add";
 	}
 
 	
 	@RequestMapping(value = "/addquestion", method = RequestMethod.POST) //发布问题
 	public ModelAndView addquestion(HttpSession httpSession,Model model,@Valid QuestionForm question) {
 		User user = (User) httpSession.getAttribute("user");
-		
-		
 		String id = questiondao.Addquestion(question, user);//
 		return new ModelAndView("redirect:/detail/"+id);
 		
@@ -63,8 +58,7 @@ public class QuestionController {
 	public String detail(Model model, @PathVariable String id,HttpSession httpSession) {
 		Question question = questiondao.findById(id);
 		model.addAttribute("question", question);
-		
-			return "jie/detail";
+		return "jie/detail";
 	}
 	
 	

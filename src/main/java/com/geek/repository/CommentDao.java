@@ -1,6 +1,9 @@
 package com.geek.repository;
 
 
+
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -28,6 +31,11 @@ public class CommentDao {
 		DetachedCriteria query = DetachedCriteria.forClass(Comment.class)
 				.add(Property.forName("id").eqProperty(id));
 		return (Comment) query.getExecutableCriteria(getSession()).list().get(0); 
+	}
+	public List<Comment> findAll(String taskId){
+		DetachedCriteria query = DetachedCriteria.forClass(Comment.class)
+				.add(Property.forName("questionid").eqProperty(taskId));
+		return query.getExecutableCriteria(getSession()).list();
 	}
 	public void  add(Comment comment){
 		getSession().save(comment);

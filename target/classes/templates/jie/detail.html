@@ -48,10 +48,10 @@
 </div>
 
 
-<div class="main layui-clear">
+<div class="main layui-clear" th:data-id="${question.id}">
   <div class="wrap">
     <div class="content detail">
-      <div class="fly-panel detail-box"  th:each="question:${question}">
+      <div class="fly-panel detail-box" >
         <h1>[[${question.title}]]</h1>
         <div class="fly-tip fly-detail-hint" data-id="{{rows.id}}">
           <span class="fly-tip-stick">置顶帖</span>
@@ -80,79 +80,31 @@
         </div>
         
         <div class="detail-body photos" style="margin-bottom: 20px;" >
-          <p>
-            该模版由 layui官方社区（<a href="http://fly.layui.com/" target="_blank">fly.layui.com</a>）倾情提供，只为表明我们对 layui 执着的信念、以及对未来持续加强的承诺。该模版基于 layui 搭建而成，可作为简约型问答社区的页面支撑。
-          </p>
-          <p>更新日志：</p>
-<pre>
-# v2.0 2017-03-15
-* 采用 layui 1.0.9_rls 作为UI支撑
-* 所有页面更换为卡片式布局
-* 首页增加置顶板块
-* Detail页增加收藏按钮
-* 用户中心改造，增加左侧导航
-* 消息中心、登入、注册、找回密码等页面UI升级
-</pre>
-          <p>
-            码云：<a href="http://git.oschina.net/sentsin/fly" target="_blank">http://git.oschina.net/sentsin/fly</a>
-            <br>GitHub：<a href="https://github.com/layui/fly" target="_blank">https://github.com/layui/fly</a>
-          </p>
-          <p>
-            <img src="../../res/images/fly.jpg" alt="Fly社区">
-          </p>
+          <p>	[[${question.context}]]</p>
         </div>
       </div>
 
       <div class="fly-panel detail-box" style="padding-top: 0;" >
         <a name="comment"></a>
-        <ul class="jieda photos" id="jieda">
-          <li data-id="12" class="jieda-daan">
-            <a name="item-121212121212"></a>
-            <div class="detail-about detail-about-reply">
-              <a class="jie-user" href="">
-                <img src="../../res/images/avatar/default.png" alt="">
-                <cite>
-                  <i>纸飞机</i>
-                
-                </cite>
-              </a>
-              <div class="detail-hits">
-                <span>3分钟前</span>
-              </div>
-              <i class="iconfont icon-caina" title="最佳答案"></i>
-            </div>
-            <div class="detail-body jieda-body">
-              <p>么么哒</p>
-            </div>
-            <div class="jieda-reply">
-              <span class="jieda-zan zanok" type="zan"><i class="iconfont icon-zan"></i><em>12</em></span>
-              <span type="reply"><i class="iconfont icon-svgmoban53"></i>回复</span>
-              <!-- <div class="jieda-admin">
-                <span type="edit">编辑</span>
-                <span type="del">删除</span>
-                <span class="jieda-accept" type="accept">采纳</span>
-              </div> -->
-            </div>
-          </li>
-          
+        <ul class="jieda photos" id="jieda" th:each="comment,row:${comment}">
+        
           <li data-id="13">
             <a name="item-121212121212"></a>
             <div class="detail-about detail-about-reply">
               <a class="jie-user" href="">
-                <img src="../../res/images/avatar/default.png" alt="">
+                <img src="../../res/images/avatar/default.png" th:src="@{./image/__${comment.img}__}" alt="">
                 <cite>
-                  <i>香菇</i>
-                  <em style="color:#FF9E3F">活雷锋</em>
+                  <i>[[${comment.username}]]</i>
                 </cite>
               </a>
               <div class="detail-hits">
-                <span>刚刚</span>
+                <span>[[${comment.ctime}]]</span>
               </div>
             </div>
             <div class="detail-body jieda-body">
-              <p>蓝瘦</p>
+              <p>[[${comment.context}]]</p>
             </div>
-            <div class="jieda-reply">
+            <!-- <div class="jieda-reply">
               <span class="jieda-zan" type="zan"><i class="iconfont icon-zan"></i><em>0</em></span>
               <span type="reply"><i class="iconfont icon-svgmoban53"></i>回复</span>
               <div class="jieda-admin">
@@ -160,14 +112,14 @@
                 <span type="del">删除</span>
                 <span class="jieda-accept" type="accept">采纳</span>
               </div>
-            </div>
+            </div> -->
           </li>
           
           <!-- <li class="fly-none">没有任何回答</li> -->
         </ul>
         
         <div class="layui-form layui-form-pane">
-          <form action="/jie/reply/" method="post">
+          <form>
             <div class="layui-form-item layui-form-text">
               <div class="layui-input-block">
                 <textarea id="L_content" name="content" required lay-verify="required" placeholder="我要回答"  class="layui-textarea fly-editor" style="height: 150px;"></textarea>
@@ -175,7 +127,7 @@
             </div>
             <div class="layui-form-item">
               <input type="hidden" name="jid" value="{{rows.id}}">
-              <button class="layui-btn" lay-filter="*" lay-submit>提交回答</button>
+              <div class="layui-btn" lay-filter="*" lay-submit>提交回答</div>
             </div>
           </form>
         </div>
@@ -213,6 +165,7 @@
     <a href="http://fly.layui.com/jie/2461.html" target="_blank">微信公众号</a>
   </p>
 </div>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <script th:src="@{/layui/layui.js}"></script>
 <script>
 layui.cache.page = 'jie';
@@ -239,6 +192,16 @@ layui.config({
   */
 });
 </script>
-
+<script>
+jQuery(function($){
+	alert("a");
+	$("layui-btn").click(function(){
+		var questionid = $(".layui-clear").data("id");
+		var context = $(".L_content").val();
+		console.log(questionid+"------"+context);
+		//$.post("/comment/add",{questionid:},function(){});
+	})
+})
+</script>
 </body>
 </html>

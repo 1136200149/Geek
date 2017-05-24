@@ -2,6 +2,7 @@ package com.geek.domain;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -22,7 +23,8 @@ public class Comment {
 	private String questionid;
 	
 	public void Comment(){
-		
+		this.id = UUID.randomUUID().toString().replace("-", "");
+		this.ctime = new Timestamp(System.currentTimeMillis());
 	}
 	public String getId() {
 		return id;

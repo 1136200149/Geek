@@ -19,18 +19,15 @@ public class Comment {
 	private String name;
 	private String userid;
 	private Timestamp ctime;
-	private String context;
+	private String content;
 	private String questionid;
 	
-	public void Comment(){
+	public Comment(){
 		this.id = UUID.randomUUID().toString().replace("-", "");
 		this.ctime = new Timestamp(System.currentTimeMillis());
 	}
 	public String getId() {
 		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
 	}
 	public String getName() {
 		return name;
@@ -50,11 +47,12 @@ public class Comment {
 	public void setCtime(Timestamp ctime) {
 		this.ctime = ctime;
 	}
-	public String getContext() {
-		return context;
+	
+	public String getContent() {
+		return content;
 	}
-	public void setContext(String context) {
-		this.context = context;
+	public void setContent(String content) {
+		this.content = content;
 	}
 	public String getQuestionid() {
 		return questionid;

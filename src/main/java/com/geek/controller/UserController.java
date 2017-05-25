@@ -76,9 +76,9 @@ public class UserController {
 	}
 	
 	@RequestMapping("/logout") //登出
-	public String logout(HttpSession httpSession) {
+	public ModelAndView logout(HttpSession httpSession) {
 		httpSession.removeAttribute("user");  
-		return "/index";
+		return new ModelAndView("redirect:/");
 	}
 	
 	

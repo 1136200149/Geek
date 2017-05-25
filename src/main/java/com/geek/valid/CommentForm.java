@@ -4,16 +4,17 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class CommentForm {
 		@NotEmpty(message="评论内容不能为空！")
-		private String context;
+		private String content;
 		@NotEmpty(message="评论失败")
 		private String questionid;
 		
 		
-		public String getContext() {
-			return context;
+	
+		public String getContent() {
+			return content;
 		}
-		public void setContext(String context) {
-			this.context = context;
+		public void setContent(String content) {
+			this.content = content;
 		}
 		public String getQuestionid() {
 			return questionid;

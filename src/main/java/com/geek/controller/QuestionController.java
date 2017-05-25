@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.geek.domain.Comment;
 import com.geek.domain.Nav;
 import com.geek.domain.Question;
 import com.geek.domain.User;
+import com.geek.repository.CommentDao;
 import com.geek.repository.NavDao;
 import com.geek.repository.QuestionDao;
 import com.geek.repository.UserDao;
@@ -29,6 +31,9 @@ import com.geek.valid.QuestionForm;
 public class QuestionController {
 	@Resource
 	private QuestionDao questiondao;
+	
+	@Resource
+	private CommentDao commentdao;
 	
 	@Resource
 	private UserDao userdao;
@@ -57,7 +62,9 @@ public class QuestionController {
 	@RequestMapping("/detail/{id}") //详情
 	public String detail(Model model, @PathVariable String id,HttpSession httpSession) {
 		Question question = questiondao.findById(id);
+		List<Comment> comment = commentdao.findAll(id);
 		model.addAttribute("question", question);
+		model.addAttribute("comment", comment);
 		return "jie/detail";
 	}
 	

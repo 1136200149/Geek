@@ -63,12 +63,12 @@
             <i class="iconfont" title="人气">&#xe60b;</i> 98032
           </div>
         </div>
-        <div class="detail-about" th:each="user:${user}">
+        <div class="detail-about">
           <a class="jie-user" href="">
             <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="">
             <cite>
               [[${question.uname}]]
-              <em>1分钟前发布</em>
+              <em>  [[${question.ctime}]]</em>
             </cite>
           </a>
           <div class="detail-hits" data-id="{{rows.id}}">
@@ -94,7 +94,7 @@
               <a class="jie-user" href="">
                 <img src="../../res/images/avatar/default.png" th:src="@{./image/__${comment.img}__}" alt="">
                 <cite>
-                  <i>[[${comment.username}]]</i>
+                  <i>[[${comment.name}]]</i>
                 </cite>
               </a>
               <div class="detail-hits">
@@ -102,7 +102,7 @@
               </div>
             </div>
             <div class="detail-body jieda-body">
-              <p>[[${comment.context}]]</p>
+              <p>[[${comment.content}]]</p>
             </div>
             <!-- <div class="jieda-reply">
               <span class="jieda-zan" type="zan"><i class="iconfont icon-zan"></i><em>0</em></span>
@@ -127,7 +127,7 @@
             </div>
             <div class="layui-form-item">
               <input type="hidden" name="jid" value="{{rows.id}}">
-              <div class="layui-btn" lay-filter="*" lay-submit>提交回答</div>
+              <div class="layui-btn">提交回答</div>
             </div>
           </form>
         </div>
@@ -194,12 +194,10 @@ layui.config({
 </script>
 <script>
 jQuery(function($){
-	alert("a");
-	$("layui-btn").click(function(){
+	$(".layui-btn").click(function(){
 		var questionid = $(".layui-clear").data("id");
-		var context = $(".L_content").val();
-		console.log(questionid+"------"+context);
-		//$.post("/comment/add",{questionid:},function(){});
+		var context = $("#L_content").val();
+		$.post("/comment/add",{questionid:questionid,content:context},function(){alert("success!");});
 	})
 })
 </script>

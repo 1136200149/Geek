@@ -1,6 +1,9 @@
 package com.geek.domain;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Arrays;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,11 +11,13 @@ import javax.persistence.Id;
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.FilterDefs;
 import org.hibernate.annotations.ParamDef;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @FilterDefs({ @FilterDef(name = "Screen", parameters = { @ParamDef(name = "uid", type = "string") }) })
-public class User {
+public class User implements Serializable,UserDetails {
 	@Id
 	private String id;
 	private String uname;
@@ -22,8 +27,28 @@ public class User {
 	private Timestamp ctime;
 	private Timestamp ltime;
 	private int authority;
+	private String roles;
 	
+	public User(){
+		this.roles = "ROLE_USER";
+	}
 	
+	public User(User user){
+		this.uname = user.getUname(); 
+		this.passwd = user.getPasswd();
+		this.phone = user.getPhone();
+		this.mail = user.getMail();
+		this.roles =user.getRoles();
+	}
+	
+	public String getRoles() {
+		return roles;
+	}
+
+	public void setRoles(String roles) {
+		this.roles = roles;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -76,5 +101,45 @@ public class User {
 		this.authority = authority;
 	}
 
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return Arrays.asList(new SimpleGrantedAuthority(getRoles()));
+	}
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return this.getPasswd();
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return this.getUname();
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 
 }

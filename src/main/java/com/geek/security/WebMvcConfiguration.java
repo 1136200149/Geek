@@ -1,4 +1,4 @@
-package com.geek.config;
+package com.geek.security;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.Ordered;
@@ -12,9 +12,9 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
 
     
 
-    @Override
+   /* @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("login");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
-    }
+    }*/
 }

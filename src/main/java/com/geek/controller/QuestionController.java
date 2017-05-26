@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -60,6 +61,7 @@ public class QuestionController {
 	
 	
 	@RequestMapping("/detail/{id}") //详情
+	@PreAuthorize("hasAnyRole('user')")
 	public String detail(Model model, @PathVariable String id,HttpSession httpSession) {
 		Question question = questiondao.findById(id);
 		List<Comment> comment = commentdao.findAll(id);

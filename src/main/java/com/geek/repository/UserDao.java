@@ -34,6 +34,15 @@ public class UserDao {
 		return getSession().get(User.class, id);
 	}
 	
+	public User findByAccount(String account){
+		DetachedCriteria dc = DetachedCriteria.forClass(User.class);
+		dc.add(Property.forName("uname").eq(account));
+		Criteria criteria = dc.getExecutableCriteria(getSession());
+		List<User> list = criteria.list();
+		User user = new User();
+		if (list.size() > 0) user = list.get(0);
+		return user;	
+	}
 	public boolean findByUserNameExist(String username) {
 		boolean exist = true;
 		DetachedCriteria dc = DetachedCriteria.forClass(User.class);

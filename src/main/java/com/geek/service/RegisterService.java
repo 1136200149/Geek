@@ -4,6 +4,7 @@ package com.geek.service;
 import java.sql.Timestamp;
 import java.util.UUID;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 
 import com.geek.domain.User;
@@ -52,7 +53,7 @@ public class RegisterService {
 		User user = new User();
 		user.setId(registerForm.getId()); //用户ID
 		user.setUname(registerForm.getUname()); //用户账号
-		user.setPasswd(MD5.stringMD5(registerForm.getPasswd())); //用户密码
+		user.setPasswd((new BCryptPasswordEncoder()).encode(registerForm.getPasswd())); //用户密码
 		user.setMail(registerForm.getMail()); //用户邮箱
 		user.setCtime(new Timestamp(System.currentTimeMillis()));
 		userDao.SaveUser(user);

@@ -24,7 +24,7 @@ import com.geek.valid.RegisterForm;
 
 
 @Controller
-public class UserController {
+public class UserController extends BaseController {
 	
 	@Resource
 	private UserDao userdao;
@@ -32,8 +32,9 @@ public class UserController {
 
 
 	@RequestMapping("/login") //登陆入口
-	public String login() {
-		return "user/login";
+	public String login(HttpSession session) {
+		session.setAttribute("user", getSessionUser(session));
+		return "login";
 	}
 
 	

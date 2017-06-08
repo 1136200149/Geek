@@ -1,0 +1,28 @@
+<form method="post" th:action="@{/login}">
+            
+    
+             <div class="layui-form-item">
+                <label for="L_username" class="layui-form-label">用户名</label>
+                <div class="layui-input-inline">
+                  <input type="text" id="L_username" name="username" required="" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+                   <div class="layui-form-mid layui-word-aux">您唯一的登入名</div>
+              </div>
+              
+              
+              <div class="layui-form-item">
+                <label for="L_pass" class="layui-form-label">密码</label>
+                <span class="h2 font-w600 push-30-t push-5" th:text="${#httpServletRequest.getParameter('error')}" style="color:red"></span>
+                <div class="layui-input-inline">
+                  <input type="password" id="L_pass" name="password" required="" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item">
+     			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                <button class="layui-btn" type="submit">立即登录</button>
+                <span style="padding-left:20px;">
+                  <a href="forget.html">忘记密码？</a>
+                </span>
+              </div>
+             
+            </form>

@@ -17,7 +17,11 @@ public class CommentService {
 	@Resource
 	private CommentDao commentDao;
 	
-	
+	/**
+	 *  
+	 * @param form
+	 * @param user
+	 */
 	public void addComment(CommentForm form,User user){
 		Comment comment = new Comment();
 		comment.setUserid(user.getId());

@@ -1,9 +1,8 @@
 package com.geek.valid;
 
-import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.web.multipart.MultipartFile;
+
+
 
 import com.geek.domain.Nav;
 
@@ -11,21 +10,21 @@ import com.geek.domain.Nav;
 public class QuestionForm {
 
 
-	
-
-	private String context;
+	private String content;
 
 	private String title;
 
 	private Nav nav = new Nav();
 	
 
-	public String getContext() {
-		return context;
+
+
+	public String getContent() {
+		return content;
 	}
 
-	public void setContext(String context) {
-		this.context = context;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public String getTitle() {

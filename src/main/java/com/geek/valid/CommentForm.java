@@ -8,6 +8,7 @@ public class CommentForm {
 		@NotEmpty(message="评论失败")
 		private String questionid;
 		
+		private String replieid;
 		
 	
 		public String getContent() {
@@ -22,5 +23,12 @@ public class CommentForm {
 		public void setQuestionid(String questionid) {
 			this.questionid = questionid;
 		}
+		public String getReplieid() {
+			return replieid;
+		}
+		public void setReplieid(String replieid) {
+			this.replieid = replieid;
+		}
 			
+		
 	}

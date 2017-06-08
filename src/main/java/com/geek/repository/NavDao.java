@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.boot.model.source.spi.PluralAttributeElementSourceBasic;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.stereotype.Repository;
 
@@ -31,9 +32,8 @@ public class NavDao {
 	    List<Nav> list = criteria.list();
 	    return list;
 	}
-	
-	public User findById(String id) {
-		return getSession().get(User.class, id);
+	public void save(Nav nav){
+		getSession().save(nav);
 	}
 	
 	

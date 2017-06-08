@@ -20,6 +20,7 @@ public class Comment {
 	private String userid;
 	private Timestamp ctime;
 	private String content;
+	private String replieid;
 	private String questionid;
 	
 	public Comment(){

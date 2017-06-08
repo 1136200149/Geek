@@ -16,6 +16,7 @@ import javax.transaction.Transactional;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
@@ -42,18 +43,24 @@ public class QuestionDao {
 		return EntityManager.unwrap(org.hibernate.Session.class);	
 	}
 	
-
+	/**
+	 * 查询所有问题，按时间降序排序
+	 * @return
+	 */
 	public List<Question> FindAll(){
 	    DetachedCriteria dc = DetachedCriteria.forClass(Question.class);
 	    Criteria criteria = dc.getExecutableCriteria(getSession());
-	    dc.addOrder(org.hibernate.criterion.Order.desc("ctime"));//通过 ctime 来排序
+	    dc.addOrder(org.hibernate.criterion.Order.desc("ctime"));
 	    List<Question> list = criteria.list();
 	    return list;
 	}
 	
 	
-	
-	public void DelectArticle(String id){
+	/**
+	 * 删除问题
+	 * @param id
+	 */
+	public void DelectQuestion(String id){
 		Question news=findById(id);
 		getSession().delete(news);
 
@@ -63,20 +70,43 @@ public class QuestionDao {
 		return getSession().get(Question.class, id);
 	}
 	
-	
+	/**
+	 * 添加问题
+	 * @param questionForm
+	 * @param user
+	 * @return
+	 */
 	public String Addquestion(QuestionForm questionForm,User user) {
 		String uuid = UUID.randomUUID().toString().replace("-", "");
 		Question question = new Question();
 		question.setId(uuid);//问题的id
 		question.setUserid(user.getId());//用户id
 		question.setCtime(new Timestamp(System.currentTimeMillis()));//创建时间
-		question.setContext(questionForm.getContext());
+		question.setContent(questionForm.getContent());
 		question.setTitle(questionForm.getTitle());
 		question.setNav(questionForm.getNav());
 		question.setNav(questionForm.getNav());
 		question.setUname(user.getUname());
 		getSession().save(question);
 		return uuid;
+		
+	}
+
+	/**
+	 * 增加浏览次数
+	 * @param views
+	 * @param questionid
+	 */
+
+	public void addViews(int views, String questionid) {
+		int updatedEntities = getSession().createQuery(
+			    "update Question " +
+			    "set views = :views " +
+			    "where id = :questionid" )
+			.setParameter( "views", views )
+			.setParameter( "questionid", questionid )
+			.executeUpdate();
+		System.err.println(updatedEntities);
 		
 	}
 	

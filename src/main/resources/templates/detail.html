@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>Geek</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+</head>
+<body>
+
+	<p th:if="${user == null}"><h1>Welcome,</h1><h2>[[${user.uname}]]</h2></p>
+	
+     <ul th:each="question:${question}">
+     
+     <li class="layui-clear" th:data-id="${question.id}">
+     <p>[[${question.title}]]</p>
+     <p>[[${question.content}]]</p>
+     <p><span>votes:[[${question.votes}]]</span><span>answers:[[${question.answers}]]</span><span>views:[[${question.views}]]</span></span></p>
+     <p>[[${question.nav.name}]]</p>
+     </li>
+     </ul>	
+     <br><br><br><br><br><br>
+     答案
+      <ul th:each="comment,row:${comment}">
+          <li data-id="13">
+            <a name="item-121212121212"></a>
+            <div class="detail-about detail-about-reply">
+              <a class="jie-user" href="">
+                <!-- <img src="../../res/images/avatar/default.png" th:src="@{./image/__${comment.img}__}" alt=""> -->
+                <cite>
+                  <i>[[${comment.name}]]</i>
+                </cite>
+              </a>
+              <div class="detail-hits">
+                <span>[[${comment.ctime}]]</span>
+              </div>
+            </div>
+            <div class="detail-body jieda-body">
+              <p>[[${comment.content}]]</p>
+            </div>
+             <div class="jieda-reply" th:if="${question.userid == user.id}">
+              <span class="jieda-zan" type="zan"><i class="iconfont icon-zan"></i><em>0</em></span>
+              <span type="reply"><i class="iconfont icon-svgmoban53"></i>回复</span>
+              <div class="jieda-admin">
+               <!--  <span type="edit">编辑</span> -->
+                <span class="del" th:data-id="${comment.id}">删除</span>
+                <!-- <span class="jieda-accept" type="accept">采纳</span> -->
+              </div>
+            </div> 
+          </li>
+          
+          <!-- <li class="fly-none">没有任何回答</li> -->
+        </ul>
+        
+        
+        
+        
+        <ul th:each="answer,row:${answer}">
+        	<li th:text="${answer.content}"></li>
+        </ul>
+        
+        <div class="layui-form layui-form-pane">
+          <form>
+            <div class="layui-form-item layui-form-text">
+              <div class="layui-input-block">
+                <textarea id="L_content" name="content" required lay-verify="required" placeholder="我要回答"  class="layui-textarea fly-editor" style="height: 150px;"></textarea>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <input type="hidden" name="jid" th:value="${question.id}">
+              <div class="layui-btn">提交回答</div>
+            </div>
+          </form>
+     		
+    
+
+</body>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+jQuery(function($){
+	$(".layui-btn").click(function(){
+		var questionid = $(".layui-clear").data("id");
+		var context = $("#L_content").val();
+		$.get("/answer/add",{questionid:questionid,content:context},function(){alert("success!");});
+	})
+	 $(".del").click(function(){
+		var commentid = $(this).data("id");
+		$.get("/comment/delete",{commentid:commentid});
+	})
+})
+</script>
+
+</html>

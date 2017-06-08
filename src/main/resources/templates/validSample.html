@@ -1,0 +1,11 @@
+<form th:action="@{/validSample}" th:object="${form}" method="get">  
+<table>  
+<tr>  
+  <td>姓名：</td>  
+  <td>  
+    <input type="text" th:field="*{name}" th:errorclass="fieldError" />  
+  </td>  
+  <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red"></td>  
+</tr>  
+</table>  
+</form> 

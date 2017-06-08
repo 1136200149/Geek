@@ -1,0 +1,33 @@
+<form action="/addquestion" method="get" th:object="${form}" enctype="multipart/form-data">
+        <div class="layui-form-item">
+          <label for="L_title" class="layui-form-label">标题</label>
+          <div class="layui-input-block">
+            <input type="text" id="L_title" name="title" required lay-verify="required" autocomplete="off" class="layui-input" >
+            
+          </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+          <div class="layui-input-block">
+            <textarea id="L_content"  th:field="*{context}" th:errorclass="fieldError" required lay-verify="required" placeholder="请输入内容" class="layui-textarea fly-editor" style="height: 260px;"></textarea>
+            <p th:if="${#fields.hasErrors('context')}" th:errors="*{context}" style="color: red"></p>
+          </div>
+          <label for="L_content" class="layui-form-label" style="top: -2px;">描述</label>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-inline">
+            <label class="layui-form-label">所在类别</label>
+            <div class="layui-input-block">
+              <select lay-verify="required"  name="nav.id">
+                <option>请选择</option>
+                <option th:each="nav:${navs}" th:value="${nav?.id}" th:text="${nav?.name}">Java</option> 
+              </select>
+            </div>
+          </div>
+          
+        </div>
+        
+   
+        <div class="layui-form-item">
+          <button class="layui-btn" type="sumbit">立即发布</button>
+        </div>
+      </form>

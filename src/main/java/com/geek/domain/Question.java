@@ -19,26 +19,23 @@ public class Question {
 	private String userid;
 	private String title;
 	private String uname;
-	private String context;
-	private Integer top;
+	private String content;
 	private Timestamp ctime;
-	private String image;
-	private String number;
-	private String state;
+	private Integer views;
+	private Integer answers;
+	private Integer votes;
 	
 		@OneToOne
 		@JoinColumn(name="navid")
 		private Nav nav;
 
+	public Question(){
+		this.views = 0;
+		this.answers = 0;
+		this.votes = 0;
+	}
 		
-		
-		public String getState() {
-			return state;
-		}
-
-		public void setState(String state) {
-			this.state = state;
-		}
+	
 
 		public String getId() {
 			return id;
@@ -72,21 +69,19 @@ public class Question {
 			this.uname = uname;
 		}
 
-		public String getContext() {
-			return context;
+		
+
+		public String getContent() {
+			return content;
 		}
 
-		public void setContext(String context) {
-			this.context = context;
+
+
+		public void setContent(String content) {
+			this.content = content;
 		}
 
-		public Integer getTop() {
-			return top;
-		}
 
-		public void setTop(Integer top) {
-			this.top = top;
-		}
 
 		public Timestamp getCtime() {
 			return ctime;
@@ -94,22 +89,6 @@ public class Question {
 
 		public void setCtime(Timestamp ctime) {
 			this.ctime = ctime;
-		}
-
-		public String getImage() {
-			return image;
-		}
-
-		public void setImage(String image) {
-			this.image = image;
-		}
-
-		public String getNumber() {
-			return number;
-		}
-
-		public void setNumber(String number) {
-			this.number = number;
 		}
 
 		public Nav getNav() {
@@ -120,7 +99,29 @@ public class Question {
 			this.nav = nav;
 		}
 
-		public Question() {
+
+		public Integer getViews() {
+			return views;
+		}
+
+		public void setViews(Integer views) {
+			this.views = views;
+		}
+
+		public Integer getAnswers() {
+			return answers;
+		}
+
+		public void setAnswers(Integer answers) {
+			this.answers = answers;
+		}
+
+		public Integer getVotes() {
+			return votes;
+		}
+
+		public void setVotes(Integer votes) {
+			this.votes = votes;
 		}
 		
 

@@ -44,8 +44,8 @@ public class QuestionDao {
 	}
 	
 	/**
-	 * 查询所有问题，按时间降序排序
-	 * @return
+	 *  查询所有问题，按时间降序排序
+	 * @return List<Question>
 	 */
 	public List<Question> FindAll(){
 	    DetachedCriteria dc = DetachedCriteria.forClass(Question.class);
@@ -85,7 +85,6 @@ public class QuestionDao {
 		question.setContent(questionForm.getContent());
 		question.setTitle(questionForm.getTitle());
 		question.setNav(questionForm.getNav());
-		question.setNav(questionForm.getNav());
 		question.setUname(user.getUname());
 		getSession().save(question);
 		return uuid;
@@ -93,17 +92,27 @@ public class QuestionDao {
 	}
 
 	/**
-	 * 增加浏览次数
-	 * @param views
+	 * question表的views字段+1
 	 * @param questionid
 	 */
 
-	public void addViews(int views, String questionid) {
+	public void addViews(String questionid) {
 		int updatedEntities = getSession().createQuery(
 			    "update Question " +
-			    "set views = :views " +
+			    "set views = views +1 " +
 			    "where id = :questionid" )
-			.setParameter( "views", views )
+			.setParameter( "questionid", questionid )
+			.executeUpdate();
+	}
+	/**
+	 * question表的answers字段+1
+	 * @param questionid
+	 */
+	public void addAnswer(String questionid) {
+		int updatedEntities = getSession().createQuery(
+			    "update Question " +
+			    "set answers = answers +1 " +
+			    "where id = :questionid" )
 			.setParameter( "questionid", questionid )
 			.executeUpdate();
 		System.err.println(updatedEntities);

@@ -21,42 +21,18 @@
      </ul>	
      <br><br><br><br><br><br>
      答案
-      <ul th:each="comment,row:${comment}">
-          <li data-id="13">
-            <a name="item-121212121212"></a>
-            <div class="detail-about detail-about-reply">
-              <a class="jie-user" href="">
-                <!-- <img src="../../res/images/avatar/default.png" th:src="@{./image/__${comment.img}__}" alt=""> -->
-                <cite>
-                  <i>[[${comment.name}]]</i>
-                </cite>
-              </a>
-              <div class="detail-hits">
-                <span>[[${comment.ctime}]]</span>
-              </div>
-            </div>
-            <div class="detail-body jieda-body">
-              <p>[[${comment.content}]]</p>
-            </div>
-             <div class="jieda-reply" th:if="${question.userid == user.id}">
-              <span class="jieda-zan" type="zan"><i class="iconfont icon-zan"></i><em>0</em></span>
-              <span type="reply"><i class="iconfont icon-svgmoban53"></i>回复</span>
-              <div class="jieda-admin">
-               <!--  <span type="edit">编辑</span> -->
-                <span class="del" th:data-id="${comment.id}">删除</span>
-                <!-- <span class="jieda-accept" type="accept">采纳</span> -->
-              </div>
-            </div> 
-          </li>
-          
-          <!-- <li class="fly-none">没有任何回答</li> -->
-        </ul>
+      
         
         
         
         
         <ul th:each="answer,row:${answer}">
-        	<li th:text="${answer.content}"></li>
+        	<li th:text="${answer.content}"></li><p th:text="${answer.ctime}"></p>
+        	
+        	<ul th:each="comment,row:${comment}" >
+        		<li th:if="${comment.replieid == answer.id}">[[${comment.content}]]</li>
+        	</ul>
+        	<input class="content" type="text"/><span class="reply" th:data-id="${answer.id}">回复</span>
         </ul>
         
         <div class="layui-form layui-form-pane">
@@ -80,9 +56,18 @@
 jQuery(function($){
 	$(".layui-btn").click(function(){
 		var questionid = $(".layui-clear").data("id");
-		var context = $("#L_content").val();
-		$.get("/answer/add",{questionid:questionid,content:context},function(){alert("success!");});
+		var content = $("#L_content").val();
+		$.get("/answer/add",{question_id:questionid,content:content},function(){alert("success!");});
 	})
+	
+	$(".reply").click(function(){
+		var questionid = $(".layui-clear").data("id");
+		var content = $(this).prevAll(".content").val();
+		var replyid = $(this).data("id");
+		$.get("/comment/add",{questionid:questionid,content:content,replieid:replyid},function(){alert("success!");});
+	})
+	
+	
 	 $(".del").click(function(){
 		var commentid = $(this).data("id");
 		$.get("/comment/delete",{commentid:commentid});

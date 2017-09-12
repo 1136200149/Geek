@@ -25,9 +25,9 @@ public class Question {
 	private Integer answers;
 	private Integer votes;
 	
-		@OneToOne
-		@JoinColumn(name="navid")
-		private Nav nav;
+	@OneToOne
+	@JoinColumn(name="navid")
+	private Nav nav;
 
 	public Question(){
 		this.views = 0;

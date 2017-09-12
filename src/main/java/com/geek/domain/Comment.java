@@ -61,6 +61,12 @@ public class Comment {
 	public void setQuestionid(String questionid) {
 		this.questionid = questionid;
 	}
+	public String getReplieid() {
+		return replieid;
+	}
+	public void setReplieid(String replieid) {
+		this.replieid = replieid;
+	}
 	
 	
 	

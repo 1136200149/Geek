@@ -1,4 +1,4 @@
-<form action="/addquestion" method="get" th:object="${form}" enctype="multipart/form-data">
+<form action="/addquestion" method="get"  enctype="multipart/form-data">
         <div class="layui-form-item">
           <label for="L_title" class="layui-form-label">标题</label>
           <div class="layui-input-block">
@@ -8,8 +8,8 @@
         </div>
         <div class="layui-form-item layui-form-text">
           <div class="layui-input-block">
-            <textarea id="L_content"  th:field="*{context}" th:errorclass="fieldError" required lay-verify="required" placeholder="请输入内容" class="layui-textarea fly-editor" style="height: 260px;"></textarea>
-            <p th:if="${#fields.hasErrors('context')}" th:errors="*{context}" style="color: red"></p>
+            <textarea id="L_content"  required lay-verify="required" placeholder="请输入内容" class="layui-textarea fly-editor" style="height: 260px;"></textarea>
+            
           </div>
           <label for="L_content" class="layui-form-label" style="top: -2px;">描述</label>
         </div>
@@ -21,6 +21,7 @@
                 <option>请选择</option>
                 <option th:each="nav:${navs}" th:value="${nav?.id}" th:text="${nav?.name}">Java</option> 
               </select>
+              	自定义标签<input type="text" name=""/>
             </div>
           </div>
           

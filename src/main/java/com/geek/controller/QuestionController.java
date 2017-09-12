@@ -76,19 +76,10 @@ public class QuestionController extends BaseController {
 	
 	
 	
-	
-	@RequestMapping(value="/validSample", method = RequestMethod.GET)  
-    public String postValidSample(@ModelAttribute("form") @Validated ValidSampleForm form, BindingResult result, Model model) {  
-   
-  
-        return "validSample";  
-    }  
-	
-	
 	@RequestMapping("/detail/{id}") //详情
 	public String detail(Model model, @PathVariable String id,HttpSession httpSession) {
 		Question question = questionDao.findById(id);
-		questionDao.addViews(question.getViews() +1,id);
+		questionDao.addViews(id);
 		List<Comment> comment = commentDao.findAll(id);
 		List<Answer> answers = answerDao.findAll_ctime(id);
 		model.addAttribute("user",getSessionUser(httpSession));

@@ -52,6 +52,7 @@ public class CommentDao {
 		CriteriaQuery<Comment> query = builder.createQuery(Comment.class);
 		Root<Comment> root = query.from(Comment.class);
 		query.where(builder.equal(root.get("questionid"), taskId));
+		query.orderBy(builder.desc(root.get("ctime")));
 		List comment  = entityManager.createQuery(query).getResultList();
 		return comment;
 	}

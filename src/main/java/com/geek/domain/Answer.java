@@ -13,7 +13,7 @@ import javax.persistence.OneToOne;
 public class Answer {
 	@Id
 	private String id;
-	private String context;
+	private String content;
 	private String question_id;
 	@OneToOne
 	private User user;
@@ -33,11 +33,12 @@ public class Answer {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getContext() {
-		return context;
+	
+	public String getContent() {
+		return content;
 	}
-	public void setContext(String context) {
-		this.context = context;
+	public void setContent(String content) {
+		this.content = content;
 	}
 	public String getQuestion_id() {
 		return question_id;
